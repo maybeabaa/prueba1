@@ -16,6 +16,34 @@
             padding: 8px;
             text-align: left;
         }
+        @media only screen and (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            th {
+                display: none;
+            }
+
+            td {
+                border: none;
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+            }
+
+            td:before {
+                position: absolute;
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+                content: attr(data-label);
+                text-align: left;
+                font-weight: bold;
+            }
+        }
     </style>
 </head>
 <body>
@@ -60,22 +88,27 @@
 
                     const idCell = document.createElement('td');
                     idCell.textContent = item.id;
+                    idCell.setAttribute('data-label', 'ID');
                     row.appendChild(idCell);
 
                     const voltajeCell = document.createElement('td');
                     voltajeCell.textContent = item.voltaje;
+                    voltajeCell.setAttribute('data-label', 'Voltaje');
                     row.appendChild(voltajeCell);
 
                     const corrienteCell = document.createElement('td');
                     corrienteCell.textContent = item.corriente;
+                    corrienteCell.setAttribute('data-label', 'Corriente');
                     row.appendChild(corrienteCell);
 
                     const eficienciaCell = document.createElement('td');
                     eficienciaCell.textContent = item.eficiencia;
+                    eficienciaCell.setAttribute('data-label', 'Eficiencia');
                     row.appendChild(eficienciaCell);
 
                     const fechaCell = document.createElement('td');
                     fechaCell.textContent = item.fecha;
+                    fechaCell.setAttribute('data-label', 'Fecha');
                     row.appendChild(fechaCell);
 
                     tbody.appendChild(row);
