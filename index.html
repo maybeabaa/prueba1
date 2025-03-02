@@ -36,13 +36,14 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // URL de la API
             const apiURL = 'http://localhost/index%20(2).php'; // Ruta de tu API
 
-            // Función para obtener datos de la API
             async function fetchData() {
                 try {
                     const response = await fetch(apiURL);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
                     const data = await response.json();
                     renderData(data);
                 } catch (error) {
@@ -50,10 +51,9 @@
                 }
             }
 
-            // Función para renderizar los datos en la tabla
             function renderData(data) {
                 const tbody = document.getElementById('data-body');
-                tbody.innerHTML = ''; // Limpiar el contenido existente
+                tbody.innerHTML = ''; 
 
                 data.forEach(item => {
                     const row = document.createElement('tr');
@@ -82,7 +82,6 @@
                 });
             }
 
-            // Obtener datos al cargar la página
             fetchData();
         });
     </script>
