@@ -57,8 +57,7 @@
                 <th>Eficiencia</th>
                 <th>Fecha</th>
             </tr>
-        </thead>
-        <tbody id="data-body">
+        </thead id="data-body">
         </tbody>
     </table>
 
@@ -71,6 +70,9 @@
             async function fetchData() {
                 try {
                     const response = await fetch(apiURL);
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
                     const data = await response.json();
                     renderData(data);
                 } catch (error) {
