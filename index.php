@@ -4,7 +4,7 @@
 $host = "localhost";
 $usuario = "root";
 $password = "";
-$basededatos = "apiweb";
+$basededatos = "apipanel";
 
 $conexion = new mysqli($host, $usuario, $password, $basededatos);
 
