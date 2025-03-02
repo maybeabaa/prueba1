@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conexión a API REST</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Datos de la API REST</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Voltaje</th>
+                <th>Corriente</th>
+                <th>Eficiencia</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody id="data-body">
+        </tbody>
+    </table>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // URL de la API
+            const apiURL = 'http://localhost/index%20(2).php'; // Ruta de tu API
+
+            // Función para obtener datos de la API
+            async function fetchData() {
+                try {
+                    const response = await fetch(apiURL);
+                    const data = await response.json();
+                    renderData(data);
+                } catch (error) {
+                    console.error('Error al obtener los datos:', error);
+                }
+            }
+
+            // Función para renderizar los datos en la tabla
+            function renderData(data) {
+                const tbody = document.getElementById('data-body');
+                tbody.innerHTML = ''; // Limpiar el contenido existente
+
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+
+                    const idCell = document.createElement('td');
+                    idCell.textContent = item.id;
+                    row.appendChild(idCell);
+
+                    const voltajeCell = document.createElement('td');
+                    voltajeCell.textContent = item.voltaje;
+                    row.appendChild(voltajeCell);
+
+                    const corrienteCell = document.createElement('td');
+                    corrienteCell.textContent = item.corriente;
+                    row.appendChild(corrienteCell);
+
+                    const eficienciaCell = document.createElement('td');
+                    eficienciaCell.textContent = item.eficiencia;
+                    row.appendChild(eficienciaCell);
+
+                    const fechaCell = document.createElement('td');
+                    fechaCell.textContent = item.fecha;
+                    row.appendChild(fechaCell);
+
+                    tbody.appendChild(row);
+                });
+            }
+
+            // Obtener datos al cargar la página
+            fetchData();
+        });
+    </script>
+</body>
+</html>
